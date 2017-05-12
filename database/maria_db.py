@@ -16,6 +16,7 @@ class MariaDBData:
     def connect_to_db(self, host, uid, pwd, db):
         self.conx = MySQLdb.connect(
             host=host, user=uid, password=pwd, database=db)
+       
 
     def get_data(self, query):
         cursor = self.conx.cursor()

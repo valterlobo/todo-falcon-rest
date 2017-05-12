@@ -10,6 +10,9 @@ class TodoRepository(object):
     def __init__(self):
         self.mariaDB.connect_to_db('localhost', 'root', 'root', 'TODO')
 
+    def __del__(self):
+        self.mariaDB.disconnect_from_db()
+
     def list_task(self):
         list_task = []
         result_task = self.mariaDB.get_data('select * from task')
@@ -18,6 +21,18 @@ class TodoRepository(object):
             list_task.append(self.to_task(row_task))
 
         return list_task
+
+    def list_task_raw(self):
+        list_task = []
+        sql = """
+        SELECT id , title , description , 
+        done as Control_done , 
+        date_start as Control_date_start , 
+        date_stop as  Control_date_stop 
+        FROM TODO.task
+        """
+        result_task = self.mariaDB.get_data(sql)
+        return result_task
 
     def get_task(self, id):
         result_task = self.mariaDB.get_data(
@@ -28,7 +43,6 @@ class TodoRepository(object):
             task_get = None
         else:
             task_get = self.to_task(result_task[0])
-
         return task_get
 
     def new_task(self, task):
