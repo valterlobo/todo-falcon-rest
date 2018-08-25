@@ -6,11 +6,11 @@ https://falconframework.org/
 
 
 TODO API : HTTP Method	URI	Action
--GET	http://[hostname]/todo/api/v1.0/tasks	Retrieve list of tasks
--GET	http://[hostname]/todo/api/v1.0/tasks/[task_id]	Retrieve a task
--POST	http://[hostname]/todo/api/v1.0/tasks	Create a new task
--PUT	http://[hostname]/todo/api/v1.0/tasks/[task_id]	Update an existing task
--DELETE	http://[hostname]/todo/api/v1.0/tasks/[task_id]	Delete a task
+#####GET	http://[hostname]/todo/api/v1.0/tasks	Retrieve list of tasks
+#####GET	http://[hostname]/todo/api/v1.0/tasks/[task_id]	Retrieve a task
+#####POST	http://[hostname]/todo/api/v1.0/tasks	Create a new task
+#####PUT	http://[hostname]/todo/api/v1.0/tasks/[task_id]	Update an existing task
+#####DELETE	http://[hostname]/todo/api/v1.0/tasks/[task_id]	Delete a task
 
 Task fields:
     id: unique identifier for tasks. Numeric type.
@@ -39,3 +39,8 @@ Task fields:
  - pip install gunicorn
 
 #gunicorn todo_api:app
++ gunicorn [MODULE:APP] --workers=17 --worker-class=meinheld.gmeinheld.MeinheldWorker
+
+
+### artigo sobre escolha de API:Choosing a Fast Python API Framework 
+https://fgimian.github.io/blog/2018/05/17/choosing-a-fast-python-api-framework/
