@@ -31,12 +31,14 @@ Task fields:
 
 
 ## Configurar o Ambiente de TESTE ##
-- pip install virtualenv
-- virtualenv test
-- source ./test/bin/activate
+-  pip install virtualenv
+-  virtualenv test
+-  source ./test/bin/activate
  - pip install falcon
  - pip install mysqlclient
  - pip install gunicorn
+ - pip install meinheld
+
 
 #gunicorn todo_api:app
 + gunicorn [MODULE:APP] --workers=17 --worker-class=meinheld.gmeinheld.MeinheldWorker
@@ -44,3 +46,16 @@ Task fields:
 
 ### artigo sobre escolha de API:Choosing a Fast Python API Framework 
 https://fgimian.github.io/blog/2018/05/17/choosing-a-fast-python-api-framework/
+
+### Frameworks para comparar : 
+ - Vibora https://github.com/vibora-io/vibora
+ - Tornado http://www.tornadoweb.org/
+ - Sanic https://github.com/channelcat/sanic
+ 
+ ### Benchmarcks
+  - http://klen.github.io/py-frameworks-bench/
+ 
+ - uvloop https://magic.io/blog/uvloop-blazing-fast-python-networking/
+ 
+ - https://www.techempower.com/benchmarks/#section=data-r16&hw=ph&test=json
+ 

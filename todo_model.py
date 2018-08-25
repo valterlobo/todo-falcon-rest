@@ -1,11 +1,10 @@
-
-
+import datetime
 import json
 
 
 class Task(object):
 
-     # Iniciar a task
+    # Iniciar a task
     def __init__(self, title, description):
         self.title = title
         self.description = description
@@ -30,7 +29,7 @@ class Task(object):
     def obj_to_json(self):
         return json.dumps(self, cls=MyEncoder).replace("Task__", '')
 
-   # id
+    # id
     @property
     def id(self):
         return self.__id
@@ -56,7 +55,7 @@ class Task(object):
     def description(self, description):
         self.__description = description
 
-   # done
+    # done
     @property
     def done(self):
         return self.__done
@@ -65,7 +64,7 @@ class Task(object):
     def done(self, done):
         self.__done = done
 
-   # date_start
+    # date_start
     @property
     def date_start(self):
         return self.__date_start
@@ -74,7 +73,7 @@ class Task(object):
     def date_start(self, date_start):
         self.__date_start = date_start
 
-   # date_start
+    # date_start
     @property
     def date_stop(self):
         return self.__date_stop
@@ -83,8 +82,14 @@ class Task(object):
     def date_stop(self, date_stop):
         self.__date_stop = date_stop
 
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+
 
 class MyEncoder(json.JSONEncoder):
 
     def default(self, o):
+        print(o)
+        print(type(o))
         return {k.lstrip('_'): v for k, v in vars(o).items()}
