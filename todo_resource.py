@@ -1,5 +1,4 @@
 import json
-from copy import copy
 
 import falcon
 
@@ -19,6 +18,25 @@ class TodoListResource(object):
         for obj in result_list_task:
             list.append(obj.obj_to_json())
         resp.body = json.dumps(list)
+        del todo_repository
+
+    def on_post(self, req, resp):
+        resp.status = falcon.HTTP_200
+        body = req.stream.read()
+        if not body:
+            raise falcon.HTTPBadRequest('Empty request body',
+                                        'A valid JSON document is required.')
+
+        str_json = body.decode('utf-8')
+        # print (str_json)
+        # print (type(str_json))
+        task = Task.json_to_obj(str_json)
+        todo_repository = TodoRepository()
+        # print (type(task))
+        task_get = todo_repository.new_task(task)
+        resp.body = task_get.obj_to_json()
+        resp.status = falcon.HTTP_200
+
         del todo_repository
 
 
